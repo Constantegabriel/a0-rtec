@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RizonTec - Home</title>
+    <link href="styles.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>  
+    <link rel="icon" href="/img/iconrt.png" type="image/x-icon">
+    <!-- CSS do AOS -->
+<link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+
+<!-- JS do AOS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <style>
+        a.active span {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar" class="fixed top-0 w-full z-50 bg-gray-800 bg-opacity-0 text-white py-9 shadow-lg transition-all duration-300">
+        <div class="container mx-auto px-6 lg:px-12 flex justify-between items-center"> <!-- Ajustei para ter um espaçamento maior -->
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-3">
+                <img src="Rtec1.png" alt="Logo RizonTec" class="w-36 h-auto object-contain">
+            </a>
+    
+            <!-- Botão do Menu Hambúrguer (Mobile) -->
+            <button id="menu-button" class="md:hidden text-white text-[28px] focus:outline-none">
+                ☰
+            </button>
+    
+            <!-- Links (Desktop) -->
+            <div class="hidden md:flex items-center space-x-6 font-medium">
+                <a href="index.html" class="group relative nav-link">HOME</a> <!-- Adicionada a classe nav-link -->
+                <a href="services.html" class="group relative nav-link">SERVIÇOS</a>
+                <a href="enterprise.html" class="group relative nav-link">EMPRESA</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Menu Mobile -->
+    <div id="mobile-menu" class="md:hidden fixed top-0 left-0 w-full h-screen bg-gray-800 bg-opacity-95 backdrop-blur-lg z-50 transform -translate-y-full transition-transform duration-300">
+        <div class="flex flex-col items-center pt-16 space-y-6">
+            <button id="close-menu" class="text-white text-2xl absolute top-4 right-4">
+                &times;
+            </button>
+            <a href="index.html" class="text-lg text-white" onclick="toggleMenu()">HOME</a>
+            <a href="services.html" class="text-lg text-white" onclick="toggleMenu()">SERVIÇOS</a>
+            <a href="enterprise.html" class="text-lg text-white" onclick="toggleMenu()">EMPRESA</a>
+        </div>
+    </div>
+    
+    <script>
+        // Função para alternar o menu mobile
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('-translate-y-full');
+            menu.classList.toggle('translate-y-0');
+        }
+    
+        // Script para manipular a navbar
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('menu-button');
+            const closeMenu = document.getElementById('close-menu');
+            const navbar = document.getElementById('navbar');
+            const navLinks = document.querySelectorAll('.nav-link'); // Selecionando todos os links da navegação
+    
+            // Abre e fecha o menu no mobile
+            if (menuButton && closeMenu) {
+                menuButton.addEventListener('click', toggleMenu);
+                closeMenu.addEventListener('click', toggleMenu);
+            }
+    
+            // Modifica a opacidade da navbar ao rolar a página
+            let lastScrollTop = 0;
+            if (navbar) {
+                window.addEventListener('scroll', () => {
+                    const currentScroll = window.pageYOffset;
+    
+                    // Verifica se rolou a página
+                    if (currentScroll > 0) {
+                        navbar.classList.remove('bg-opacity-0');
+                        navbar.classList.add('bg-opacity-100');
+                    } else {
+                        navbar.classList.remove('bg-opacity-100');
+                        navbar.classList.add('bg-opacity-0');
+                    }
+    
+                    // Lógica para esconder/mostrar a navbar durante o scroll
+                    if (currentScroll > lastScrollTop) {
+                        navbar.style.transform = 'translateY(-100%)'; // Esconde a navbar ao descer
+                    } else {
+                        navbar.style.transform = 'translateY(0)'; // Mostra a navbar ao subir
+                    }
+                    lastScrollTop = Math.max(currentScroll, 0);
+                });
+            }
+    
+            // Verifica qual link está na página atual e aplica a borda
+            navLinks.forEach(link => {
+                const linkPath = link.getAttribute('href').toLowerCase();
+                const currentPath = window.location.pathname.split('/').pop().toLowerCase();
+    
+                if (linkPath === currentPath || (currentPath === '' && linkPath === 'index.html')) {
+                    link.classList.add('border-b-2', 'border-white'); // Adiciona borda quando estiver na página
+                }
+            });
+        });
+    </script>
+    
+    <style>
+        .nav-link {
+            position: relative;
+            padding-bottom: 4px;
+            transition: all 0.3s ease;
+        }
+    
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: transparent;
+            transition: all 0.3s ease;
+        }
+    
+        .nav-link:hover::after {
+            background-color: white;
+            width: 100%;
+        }
+        .btn {
+            transition: transform 0.3s;
+        }
+        .btn:hover {
+            transform: scale(1.05);
+        }
+  </style>
+
+  <main>
+   <section class="relative h-screen flex items-center justify-center text-white" id="home">
+    <div class="absolute inset-0 overflow-hidden">
+        <img src="bask.webp" alt="Sobre a RizonTec" class="w-full rounded-lg shadow-xl object-cover h-full">
+     <div class="absolute inset-0 bg-gray-900 opacity-70">
+     </div>
+    </div>
+    <div class="relative z-10 text-center px-4">
+     <h1 class="text-5xl md:text-7xl font-bold mb-4">
+      Rizontec
+     </h1>
+     <p class="text-2xl md:text-4xl mb-8">
+      A solução para seu negócio no digital
+     </p>
+     <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+      <a class="btn bg-green-500 text-white px-4 py-2 rounded-full text-base md:text-lg font-semibold" href="https://wa.me/">
+       WhatsApp
+      </a>
+      <a class="btn bg-pink-500 text-white px-4 py-2 rounded-full text-base md:text-lg font-semibold" href="https://www.instagram.com/">
+       Instagram
+      </a>
+      <a class="btn bg-blue-600 text-white px-4 py-2 rounded-full text-base md:text-lg font-semibold" href="https://www.facebook.com/">
+       Facebook
+      </a>
+     </div>
+    </div>
+   </section>
+
+  
+
+   
+   <section class="relative bg-gray-900 text-white  py-20 px-4 md:px-6 overflow-hidden flex items-center">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center md:items-stretch">
+      <!-- Imagem -->
+      <div class="w-full md:w-[50%] flex items-center ml-[-0px] ">
+        <img src="bask.webp"
+             alt="Equipe trabalhando"
+             class="w-full h-auto max-h-[400px] object-cover rounded-lg shadow-lg transform scale-100 transition-all duration-700 ease-in-out">
+      </div>
+  
+      <!-- Conteúdo -->
+      <div class="w-full md:w-[50%] flex flex-col justify-center px-4 md:px-6">
+        <h2 class="text-3xl font-bold text-blue-400 mb-4 animate-fade-in">
+          Transformando Negócios com Tecnologia
+        </h2>
+        <p class="text-gray-300 text-lg mb-6 animate-fade-in delay-200">
+          Na <span class="text-blue-400 font-semibold">RizonTec</span>, nosso compromisso é impulsionar empresas com soluções inovadoras e digitais. 
+          Criamos experiências únicas, combinando tecnologia e estratégia para alavancar negócios.
+        </p>
+  
+        <div class="space-y-6">
+          <!-- Bloco 1 -->
+          <div class="flex items-center space-x-4 opacity-0 transform translate-y-5 transition-all duration-700 reveal">
+            <div class="bg-blue-500 text-white p-4 rounded-full w-14 h-14 flex items-center justify-center text-2xl font-bold">🚀</div>
+            <p class="text-gray-300">Soluções que elevam o seu negócio para o próximo nível.</p>
+          </div>
+  
+          <!-- Bloco 2 -->
+          <div class="flex items-center space-x-4 opacity-0 transform translate-y-5 transition-all duration-700 reveal delay-200">
+            <div class="bg-blue-500 text-white p-4 rounded-full w-14 h-14 flex items-center justify-center text-2xl font-bold">💡</div>
+            <p class="text-gray-300">Tecnologia moderna aplicada para inovação contínua.</p>
+          </div>
+  
+          <!-- Bloco 3 -->
+          <div class="flex items-center space-x-4 opacity-0 transform translate-y-5 transition-all duration-700 reveal delay-400">
+            <div class="bg-blue-500 text-white p-4 rounded-full w-14 h-14 flex items-center justify-center text-2xl font-bold">📈</div>
+            <p class="text-gray-300">Estratégias digitais focadas no crescimento e resultados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+  
+  
+
+  <script>
+    // Animação ao rolar a página
+    document.addEventListener("scroll", () => {
+      document.querySelectorAll(".reveal").forEach((el) => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+          el.classList.add("opacity-100", "translate-y-0");
+          el.classList.remove("opacity-0", "translate-y-5");
+        }
+      });
+    });
+  </script>
+<section class="py-20 bg-gray-800" id="portfolio">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-6xl font-bold text-center mb-12 text-white">
+            Portfólio
+        </h2>
+
+        <!-- Seção de Sites -->
+        <h3 class="text-2xl font-bold text-blue-500 text-center mb-6">Criação de Sites</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+
+            <div class="border-2 border-blue-600 p-6 rounded-lg shadow-md text-center fade-in">
+                <a href="services.html">
+                    <img alt="Imagem de um site profissional" class="mx-auto mb-4 rounded-lg" 
+                         src="exe1.png" 
+                         height="300" width="400"/>
+                </a>
+                <h3 class="text-xl font-semibold mb-2 text-white">Marmoraria Florianopolis</h3>
+                <p class="text-gray-300">Site Profissional para a Marmoraria, mostrando materiais, serviços e muito mais.</p>
+            </div>
+
+            <div class="border-2 border-blue-600 p-6 rounded-lg shadow-md text-center fade-in">
+                <a href="services.html">
+                    <img alt="Imagem de um site profissional" class="mx-auto mb-4 rounded-lg" 
+                         src="exe1.png" 
+                         height="300" width="400"/>
+                </a>
+                <h3 class="text-xl font-semibold mb-2 text-white">Marmoraria São Paulo</h3>
+                <p class="text-gray-300">Site Profissional para a Marmoraria, destacando sua variedade de produtos.</p>
+            </div>
+
+            <div class="border-2 border-blue-600 p-6 rounded-lg shadow-md text-center fade-in">
+                <a href="services.html">
+                    <img alt="Imagem de um site profissional" class="mx-auto mb-4 rounded-lg" 
+                         src="exe1.png" 
+                         height="300" width="400"/>
+                </a>
+                <h3 class="text-xl font-semibold mb-2 text-white">Marmoraria Rio de Janeiro</h3>
+                <p class="text-gray-300">Site Profissional com informações detalhadas sobre serviços e projetos.</p>
+            </div>
+
+        </div>
+
+        <!-- Seção de Gerenciamento -->
+        <h3 class="text-2xl font-bold text-green-500 text-center mb-6">Gerenciamento de Redes Sociais</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+
+            <div class="border-2 border-green-600 p-6 rounded-lg shadow-md text-center fade-in">
+                <a href="services.html">
+                    <img alt="Imagem de gerenciamento de redes sociais" class="mx-auto mb-4 rounded-lg" 
+                         src="exe1.png" 
+                         height="300" width="400"/>
+                </a>
+                <h3 class="text-xl font-semibold mb-2 text-white">Gestão do Instagram da Marmoraria</h3>
+                <p class="text-gray-300">Desenvolvimento de conteúdo e gerenciamento de contas no Instagram.</p>
+            </div>
+
+            <div class="border-2 border-green-600 p-6 rounded-lg shadow-md text-center fade-in">
+                <a href="services.html">
+                    <img alt="Imagem de gerenciamento de redes sociais" class="mx-auto mb-4 rounded-lg" 
+                         src="exe1.png" 
+                         height="300" width="400"/>
+                </a>
+                <h3 class="text-xl font-semibold mb-2 text-white">Campanha Publicitária</h3>
+                <p class="text-gray-300">Criação e execução de campanhas publicitárias nas redes sociais.</p>
+            </div>
+
+            <div class="border-2 border-green-600 p-6 rounded-lg shadow-md text-center fade-in">
+                <a href="services.html">
+                    <img alt="Imagem de gerenciamento de redes sociais" class="mx-auto mb-4 rounded-lg" 
+                         src="exe1.png" 
+                         height="300" width="400"/>
+                </a>
+                <h3 class="text-xl font-semibold mb-2 text-white">Análise de Performance</h3>
+                <p class="text-gray-300">Análise detalhada das métricas e resultados das redes sociais.</p>
+            </div>
+
+        </div>
+
+        <!-- Seção de Registros -->
+        <h3 class="text-2xl font-bold text-yellow-500 text-center mb-6">Registros de Empresa no Google</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <div class="border-2 border-yellow-600 p-6 rounded-lg shadow-md text-center fade-in">
+                <a href="services.html">
+                    <img alt="Imagem de design de identidade visual" class="mx-auto mb-4 rounded-lg" 
+                         src="exe1.png" 
+                         height="300" width="400"/>
+                </a>
+                <h3 class="text-xl font-semibold mb-2 text-white">Identidade Visual da Marmoraria</h3>
+                <p class="text-gray-300">Criação de logotipo e identidade visual completa para a Marmoraria.</p>
+            </div>
+
+            <div class="border-2 border-yellow-600 p-6 rounded-lg shadow-md text-center fade-in">
+                <a href="services.html">
+                    <img alt="Imagem de design de identidade visual" class="mx-auto mb-4 rounded-lg" 
+                         src="exe1.png" 
+                         height="300" width="400"/>
+                </a>
+                <h3 class="text-xl font-semibold mb-2 text-white">Cartões de Visita Personalizados</h3>
+                <p class="text-gray-300">Design de cartões de visita que refletem a identidade da empresa.</p>
+            </div>
+
+            <div class="border-2  border-yellow-600 p-6 rounded-lg shadow-md text-center fade-in">
+                <a href="services.html">
+                    <img alt="Imagem de design de identidade visual" class="mx-auto mb-4 rounded-lg" 
+                         src="exe1.png" 
+                         height="300" width="400"/>
+                </a>
+                <h3 class="text-xl font-semibold mb-2 text-white">Material Promocional</h3>
+                <p class="text-gray-300">Criação de panfletos e outros materiais promocionais para a Marmoraria.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+ 
+<div class="bg-gray-900">
+    <section class="py-20" id="services">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+                Avaliações
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+                <!-- Serviço 1 -->
+                <div class="border-2 border-white p-6 rounded-lg shadow-md text-center relative transition-all duration-300">
+                    <img src="exe1.png" alt="Serviço 1" class="mx-auto mb-4 rounded-md" />
+                    <h3 class="text-xl font-semibold mb-2 text-white">Registro no Google Empresa</h3>
+                    <h4 class="mt-4 text-gray-300">+10 Avaliações</h4>
+                    <span class="text-white">★★★★★</span>
+                    <button class="mt-2 px-4 py-2 text-blue-600 rounded-md flex items-center mx-auto gap-2 hover:text-blue-700 transition"
+                        onclick="toggleDetails(this)">
+                        Saiba Mais
+                        <span class="arrow transition-transform transform rotate-0">▼</span>
+                    </button>
+                    <div class="details hidden opacity-0 scale-y-95 p-4 mt-4 rounded-lg transition-all duration-300">
+                        <div class="mt-2">
+                            <div class="bg-gray-700 p-4 rounded-lg mt-2">
+                                <p class="text-gray-300"><strong>Autor:</strong> Ana Souza</p>
+                                <p class="text-gray-300"><strong>Empresa:</strong> Design Creators</p>
+                                <p class="text-gray-300"><strong>Avaliação:</strong> Otimos serviços e bom engajamento</p>
+                                <span class="text-white">★★★★★</span>
+                            </div>
+                            <div class="bg-gray-700 p-4 rounded-lg mt-2">
+                                <p class="text-gray-300"><strong>Autor:</strong> Ana Souza</p>
+                                <p class="text-gray-300"><strong>Empresa:</strong> Design Creators</p>
+                                <p class="text-gray-300"><strong>Avaliação:</strong> Otimos serviços e bom engajamento</p>
+                                <span class="text-white">★★★★☆</span>
+                            </div>
+                            <div class="bg-gray-700 p-4 rounded-lg mt-2">
+                                <p class="text-gray-300"><strong>Autor:</strong> Ana Souza</p>
+                                <p class="text-gray-300"><strong>Empresa:</strong> Design Creators</p>
+                                <p class="text-gray-300"><strong>Avaliação:</strong> Otimos serviços e bom engajamento</p>
+                                <span class="text-white">★★★☆☆</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serviço 2 -->
+                <div class="border-2 border-white p-6 rounded-lg shadow-md text-center relative transition-all duration-300">
+                    <img src="exe1.png" alt="Serviço 2" class="mx-auto mb-4 rounded-md" />
+                    <h3 class="text-xl font-semibold mb-2 text-white">Criação de Sites</h3>
+                    <h4 class="mt-4 text-gray-300">+10 Avaliações</h4>
+                    <span class="text-white">★★★★★</span>
+                    <button class="mt-2 px-4 py-2 text-blue-600 rounded-md flex items-center mx-auto gap-2 hover:text-blue-700 transition"
+                        onclick="toggleDetails(this)">
+                        Saiba Mais
+                        <span class="arrow transition-transform transform rotate-0">▼</span>
+                    </button>
+                    <div class="details hidden opacity-0 scale-y-95 p-4 mt-4 rounded-lg transition-all duration-300">
+                        <div class="mt-2">
+                            <div class="bg-gray-700 p-4 rounded-lg mt-2">
+                                <p class="text-gray-300"><strong>Autor:</strong> Ana Souza</p>
+                                <p class="text-gray-300"><strong>Empresa:</strong> Design Creators</p>
+                                <p class="text-gray-300"><strong>Avaliação:</strong> Otimos serviços e bom engajamento</p>
+                                <span class="text-white">★★★★★</span>
+                            </div>
+                            <div class="bg-gray-700 p-4 rounded-lg mt-2">
+                                <p class="text-gray-300"><strong>Autor:</strong> Ana Souza</p>
+                                <p class="text-gray-300"><strong>Empresa:</strong> Design Creators</p>
+                                <p class="text-gray-300"><strong>Avaliação:</strong> Otimos serviços e bom engajamento</p>
+                                <span class="text-white">★★☆☆☆</span>
+                            </div>
+                            <div class="bg-gray-700 p-4 rounded-lg mt-2">
+                                <p class="text-gray-300"><strong>Autor:</strong> Ana Souza</p>
+                                <p class="text-gray-300"><strong>Empresa:</strong> Design Creators</p>
+                                <p class="text-gray-300"><strong>Avaliação:</strong> Otimos serviços e bom engajamento</p>
+                                <span class="text-white">★★★★★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Serviço 3 -->
+                <div class="border-2 border-white p-6 rounded-lg shadow-md text-center relative transition-all duration-300">
+                    <img src="exe1.png" alt="Serviço 3" class="mx-auto mb-4 rounded-md" />
+                    <h3 class="text-xl font-semibold mb-2 text-white">Design/Social Media</h3>
+                    <h4 class="mt-4 text-gray-300">+10 Avaliações</h4>
+                    <span class="text-white">★★★★★</span>
+                    <button class="mt-2 px-4 py-2 text-blue-600 rounded-md flex items-center mx-auto gap-2 hover:text-blue-700 transition"
+                        onclick="toggleDetails(this)">
+                        Saiba Mais
+                        <span class="arrow transition-transform transform rotate-0">▼</span>
+                    </button>
+                    <div class="details hidden opacity-0 scale-y-95 p-4 mt-4 rounded-lg transition-all duration-300">
+                        <div class="mt-2">
+                            <div class="bg-gray-700 p-4 rounded-lg mt-2">
+                                <p class="text-gray-300"><strong>Autor:</strong> Ana Souza</p>
+                                <p class="text-gray-300"><strong>Empresa:</strong> Design Creators</p>
+                                <p class="text-gray-300"><strong>Avaliação:</strong> Otimos serviços e bom engajamento</p>
+                                <span class="text-white">★★★★★</span>
+                            </div>
+                            <div class="bg-gray-700 p-4 rounded-lg mt-2">
+                                <p class="text-gray-300"><strong>Autor:</strong> Ana Souza</p>
+                                <p class="text-gray-300"><strong>Empresa:</strong> Design Creators</p>
+                                <p class="text-gray-300"><strong>Avaliação:</strong> Otimos serviços e bom engajamento</p>
+                                <span class="text-white">★★★★★</span>
+                            </div>
+                            <div class="bg-gray-700 p-4 rounded-lg mt-2">
+                                <p class="text-gray-300"><strong>Autor:</strong> Ana Souza</p>
+                                <p class="text-gray-300"><strong>Empresa:</strong> Design Creators</p>
+                                <p class="text-gray-300"><strong>Avaliação:</strong> Otimos serviços e bom engajamento</p>
+                                <span class="text-white">★★★★★</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleDetails(button) {
+            const details = button.nextElementSibling;
+            const arrow = button.querySelector('.arrow');
+
+            // Fecha qualquer outro aberto
+            document.querySelectorAll('.details').forEach(d => {
+                if (d !== details) {
+                    d.classList.add('hidden');
+                    d.style.opacity = '0';
+                    d.style.transform = 'scaleY(0.95)';
+                }
+            });
+            document.querySelectorAll('.arrow').forEach(a => a.classList.remove('rotate-180'));
+
+            // Alterna a aba clicada
+            if (details.classList.contains('hidden')) {
+                details.classList.remove('hidden');
+                setTimeout(() => {
+                    details.style.opacity = '1';
+                    details.style.transform = 'scaleY(1)';
+                }, 10);
+                arrow.classList.add('rotate-180');
+            } else {
+                details.style.opacity = '0';
+                details.style.transform = 'scaleY(0.95)';
+                setTimeout(() => details.classList.add('hidden'), 300);
+                arrow.classList.remove('rotate-180');
+            }
+        }
+    </script>
+</div>
+
+
+  
+  
+  
+  <footer class="bg-gray-800 text-white py-8">
+    <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-4 gap-8">
+            <!-- Logo com frase e bordão -->
+            <div class="text-center md:text-left">
+                <img src="Rtec1.png" alt="Logo RizonTec" class="w-32 mx-auto md:mx-0">
+                <p class="mt-4 text-gray-200">Inovação e excelência em soluções digitais. Confie em quem entende do digital e eleve sua presença online com RizonTec.</p>
+            </div>
+
+            <!-- Localização -->
+            <div class="text-center md:text-left">
+                <h3 class="text-xl font-bold">Localização</h3>
+                <p class="mt-2 text-gray-200">Av. Luiz Boiteux Piazza, 130 - Cachoeira do Bom Jesus, Florianópolis - SC, 88056-000</p>
+            </div>
+
+            <!-- Bordão da Empresa -->
+            <div class="text-center md:text-left">
+                <h3 class="text-xl font-bold">Confie em quem entende do digital.</h3>
+                <p class="mt-4 text-gray-200">RizonTec: Elevando sua presença online com soluções digitais inovadoras.</p>
+            </div>
+
+            <!-- Redes Sociais -->
+            <div class="text-center md:text-center">
+                <h3 class="text-xl font-bold">Siga-nos nas Redes Sociais</h3>
+                <div class="mt-4 flex justify-center md:justify-center space-x-4">
+                    <a href="#" class="block w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="block w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="block w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="block w-10 h-10 bg-white rounded-full flex items-center justify-center text-gray-600 hover:bg-gray-200">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-4 text-gray-200">
+        &copy; 2025 RizonTec. Todos os direitos reservados.
+    </div>
+</footer>
+
+
+
+
+ </body>
+</html>
